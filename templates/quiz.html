@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+    {% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        .score {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 40px;
+            font-weight: bold;
+            background-color: #f39c12;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Questions</h1>
+    <form action="{{ url_for('submit') }}" method="post">
+        {% for question in questions %}<br>
+            <p>{{ question.question_text }}</p>
+            <input type="radio" name="question{{ loop.index }}" value="1">  {{ question.option1 }}<br>
+            <input type="radio" name="question{{ loop.index }}" value="2">  {{ question.option2 }}<br>
+            <input type="radio" name="question{{ loop.index }}" value="3">  {{ question.option3 }}<br>
+            <input type="radio" name="question{{ loop.index }}" value="4"> {{ question.option4 }}<br>
+        {% endfor %}
+        
+        <button  class=".score" type="submit">Gönder</button>
+    </form>
+
+    <div class="score">Best Score: {{ score }}</div>
+  
+    
+</body>
+</html>
+{% endblock %}
